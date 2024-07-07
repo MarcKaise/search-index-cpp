@@ -1,12 +1,15 @@
 TARGET = search_index
 CXX = g++-14
-SRC = main.cpp
-ENV = -I/usr/local/include -L/usr/local/lib
-LIB = -lgtest_main -lgtest -lpthread
+INCLUDE = -Isrc
+GTEST = -I/usr/local/include -L/usr/local/lib -lgtest_main -lgtest -lpthread
 
-$(TARGET):
-	$(CXX) $(SRC) -o $(TARGET)
+obj:
+	g++-14 -c -o src/search_index.o $(INCLUDE) src/search_index.cc
 
-gtest:
-	$(CXX) search_index.cpp $(ENV) $(LIB) -o gtest
-	./gtest
+gtest: $(obj)
+	g++-14 -c -o test/search_index_unittest.o $(INCLUDE) $(GTEST) test/search_index_unittest.cc
+	g++-14 src/search_index.o test/search_index_unittest.o $(GTEST) -o test/search_index_unittest
+	./test/search_index_unittest
+
+clean:
+	rm -f */*.o */search_index_unittest
