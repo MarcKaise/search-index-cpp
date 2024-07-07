@@ -1,5 +1,11 @@
 # search-index-cpp
 
+## quick start
+
+```sh
+make gtest
+```
+
 ## setup for mac
 
 Install googletest
@@ -10,8 +16,8 @@ brew install gcc
 brew install g++
 git clone https://github.com/google/googletest.git
 cd googletest
-mkdir build
-cd build
+mkdir build && cd build
 cmake -DCMAKE_C_COMPILER=/opt/homebrew/bin/gcc-14 -DCMAKE_CXX_COMPILER=/opt/homebrew/bin/g++-14 ..
 make
+sudo make install
 ```
